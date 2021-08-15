@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+      url: https://github.com
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install balena cli
+        run: |
+          wget --no-verbose -O balena-cli.zip "https://github.com/balena-io/balena-cli/releases/download/${BALENA_VERSION}/balena-cli-${BALENA_VERSION}-linux-x64-standalone.zip"
+          unzip balena-cli.zip
+        env:
+          BALENA_VERSION: v12.45.2
+
+      - name: login to balena
+        run: balena-cli/balena login --token "$BALENA_API_KEY"
+        env:
+          BALENA_API_KEY: ${{ secrets.BALENA_API_KEY }}
+
+      - name: deploy fleet
+        run: balena-cli/balena push --source "$GITHUB_WORKSPACE" "$BALENA_FLEET"
+        env:
+          BALENA_FLEET: ${{ secrets.BALENA_FLEET }}

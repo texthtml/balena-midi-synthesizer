@@ -1,0 +1,38 @@
+version: "2"
+
+services:
+  audio:
+    restart: always
+    image: balenablocks/audio
+    privileged: true
+    labels:
+      io.balena.features.dbus: 1
+    networks:
+      - audio
+
+  fluidsynth:
+    restart: always
+    build:
+      context: .
+      dockerfile: fluidsynth.Dockerfile
+    environment:
+      PULSE_SERVER: audio:4317
+    volumes:
+      - sf2:/soundfonts/
+    privileged: true
+    networks:
+      - audio
+
+  autoconnect:
+    restart: always
+    image: texthtml/midi-synthetizer-autoconnect
+    privileged: true
+    network_mode: none
+
+networks:
+  audio:
+    driver: bridge
+
+volumes:
+  sf2:
+    driver: local
