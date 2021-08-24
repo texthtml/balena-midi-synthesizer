@@ -18,7 +18,7 @@ services:
     environment:
       PULSE_SERVER: audio:4317
     volumes:
-      - sf2:/soundfonts/
+      - soundfonts:/usr/share/soundfonts
     privileged: true
     networks:
       - audio
@@ -34,5 +34,5 @@ networks:
     driver: bridge
 
 volumes:
-  sf2:
+  soundfonts:
     driver: local
