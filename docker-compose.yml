@@ -17,11 +17,13 @@ services:
       dockerfile: fluidsynth.Dockerfile
     environment:
       PULSE_SERVER: audio:4317
+      ENABLED: "true"
     volumes:
       - soundfonts:/usr/share/soundfonts
     privileged: true
     networks:
       - audio
+      - fluidsynth
 
   autoconnect:
     restart: always
@@ -29,8 +31,21 @@ services:
     privileged: true
     network_mode: none
 
+  webui:
+    restart: always
+    image: texthtml/fluidsynth-webapp
+    environment:
+      FLUIDSYNTH_HOST: fluidsynth
+      FLUIDSYNTH_PORT: 9988
+    ports:
+      - "80:7000"
+    networks:
+      - fluidsynth
+
 networks:
   audio:
+    driver: bridge
+  fluidsynth:
     driver: bridge
 
 volumes:

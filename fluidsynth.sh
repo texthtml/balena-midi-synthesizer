@@ -14,4 +14,5 @@ fluidsynth \
     -o "midi.realtime-prio=${MIDI_REALTIME_PRIO:-99}" \
     -o "synth.cpu-cores=${SYNTH_CPU_CORES:-$(nproc)}" \
     -o "synth.default-soundfont=${SYNTH_DEFAULT_SOUNDFONT:-/usr/share/soundfonts/MuseScore_General.sf3}" \
+    -o "synth.verbose=${SYNTH_VERBOSE:-0}" \
     --sample-rate "${SAMPLE_RATE:=44100}"
