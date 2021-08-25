@@ -1,0 +1,22 @@
+name: midiSynthtizer
+type: sw.application
+description: >-
+  Connect your MIDI instruments and start playing
+joinable: false
+assets:
+  repository:
+    type: blob.asset
+    data:
+      url: 'github.com/texthtml/balena-midi-synthesizer/'
+  logo:
+    type: blob.asset
+    data:
+      url: >-
+        https://raw.githubusercontent.com/texthtml/balena-midi-synthesizer/main/logo.png
+data:
+  supportedDeviceTypes:
+    # - raspberry-pi
+    - raspberry-pi2
+    - raspberrypi3
+    - raspberrypi4-64
+version: 1.0.0
