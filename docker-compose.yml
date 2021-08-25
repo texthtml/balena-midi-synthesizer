@@ -27,7 +27,7 @@ services:
 
   autoconnect:
     restart: always
-    image: texthtml/midi-synthetizer-autoconnect
+    image: texthtml/midi-synthesizer-autoconnect
     privileged: true
     network_mode: none
 
