@@ -4,6 +4,11 @@ on: workflow_dispatch
 
 jobs:
   deploy:
+    strategy:
+      fail-fast: false
+      matrix:
+        fleets: ${{ fromJSON(secrets.BALENA_FLEETS) }}
+
     runs-on: ubuntu-latest
     environment:
       name: prod
@@ -26,4 +31,4 @@ jobs:
       - name: deploy fleet
         run: balena-cli/balena push --source "$GITHUB_WORKSPACE" "$BALENA_FLEET"
         env:
-          BALENA_FLEET: ${{ secrets.BALENA_FLEET }}
+          BALENA_FLEET: ${{ matrix.BALENA_FLEET }}
