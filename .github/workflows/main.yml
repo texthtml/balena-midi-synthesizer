@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        fleet: ${{ fromJSON(secrets.BALENA_FLEETS) }}
+        fleet: [text_html/midi-synthesizer]
 
     runs-on: ubuntu-latest
     environment:
