@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        fleets: ${{ fromJSON(secrets.BALENA_FLEETS) }}
+        fleet: ${{ fromJSON(secrets.BALENA_FLEETS) }}
 
     runs-on: ubuntu-latest
     environment:
@@ -29,6 +29,6 @@ jobs:
           BALENA_API_KEY: ${{ secrets.BALENA_API_KEY }}
 
       - name: deploy fleet
-        run: balena-cli/balena push --source "$GITHUB_WORKSPACE" "$BALENA_FLEET"
+        run: balena-cli/balena push --source "$GITHUB_WORKSPACE" "${{ matrix.fleet }}"
         env:
-          BALENA_FLEET: ${{ matrix.BALENA_FLEET }}
+          BALENA_FLEET: ${{ matrix.fleet }}
