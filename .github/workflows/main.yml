@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        fleet: [text_html/midi-synthesizer]
+        fleet: [text_html/midi-synthesizer, text_html/midi-synthesizer64]
 
     runs-on: ubuntu-latest
     environment:
