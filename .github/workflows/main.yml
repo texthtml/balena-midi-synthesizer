@@ -4,6 +4,11 @@ on: workflow_dispatch
 
 jobs:
   deploy:
+    strategy:
+      fail-fast: false
+      matrix:
+        fleet: [text_html/midi-synthesizer, text_html/midi-synthesizer64]
+
     runs-on: ubuntu-latest
     environment:
       name: prod
@@ -16,7 +21,7 @@ jobs:
           wget --no-verbose -O balena-cli.zip "https://github.com/balena-io/balena-cli/releases/download/${BALENA_VERSION}/balena-cli-${BALENA_VERSION}-linux-x64-standalone.zip"
           unzip balena-cli.zip
         env:
-          BALENA_VERSION: v12.45.2
+          BALENA_VERSION: v14.3.0
 
       - name: login to balena
         run: balena-cli/balena login --token "$BALENA_API_KEY"
@@ -24,6 +29,6 @@ jobs:
           BALENA_API_KEY: ${{ secrets.BALENA_API_KEY }}
 
       - name: deploy fleet
-        run: balena-cli/balena push --source "$GITHUB_WORKSPACE" "$BALENA_FLEET"
+        run: balena-cli/balena push --source "$GITHUB_WORKSPACE" "${{ matrix.fleet }}"
         env:
-          BALENA_FLEET: ${{ secrets.BALENA_FLEET }}
+          BALENA_FLEET: ${{ matrix.fleet }}
