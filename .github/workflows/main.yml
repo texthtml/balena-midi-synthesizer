@@ -21,7 +21,7 @@ jobs:
           wget --no-verbose -O balena-cli.zip "https://github.com/balena-io/balena-cli/releases/download/${BALENA_VERSION}/balena-cli-${BALENA_VERSION}-linux-x64-standalone.zip"
           unzip balena-cli.zip
         env:
-          BALENA_VERSION: v14.3.0
+          BALENA_VERSION: v18.0.0
 
       - name: login to balena
         run: balena-cli/balena login --token "$BALENA_API_KEY"
