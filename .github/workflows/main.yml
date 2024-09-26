@@ -14,7 +14,7 @@ jobs:
       name: prod
       url: https://github.com
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: install balena cli
         run: |
