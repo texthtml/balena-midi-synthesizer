@@ -1,4 +1,4 @@
-FROM alpine:3.23
+FROM alpine:3.24
 
 ADD ${DEFAULT_SOUNDFONT:-https://ftp.osuosl.org/pub/musescore/soundfont/MuseScore_General/MuseScore_General.sf3} \
     ${SYNTH_DEFAULT_SOUNDFONT:-/usr/share/soundfonts/MuseScore_General.sf3}
